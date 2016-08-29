@@ -25,12 +25,22 @@
 	height: 90vh;
 }
 
+.signup-block{
+	margin-top: 8vh;
+	height: 92vh;
+	color: #ffffff;
+}
 .query-content{
 	text-align: center;
 	margin: auto auto;
 }
 
 .bg1{
+	background-image: url('../background/background.png');
+	background-size: 100vw 100vh;
+}
+
+.bg2{
 	background-image: url('../background/background.png');
 	background-size: 100vw 100vh;
 }
