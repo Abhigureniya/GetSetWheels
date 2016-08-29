@@ -1,0 +1,51 @@
+<div class="bg1">
+		<div class="container-fluid">
+			<div class="row query-block">
+				<div class="col-md-2">&nbsp</div>
+				<div class="col-md-8 query-content">
+					<div class="jumbotron query-content-text">
+						<h1>GetSetWheels</h1>
+						<h3>3 Steps 2 Ride a bike.</h3>
+					</div>
+
+					<form class="form-inline">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker1'>
+								<input type='text' class="form-control" id="from" placeholder="From"/>
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker2'>
+								<input type='text' class="form-control" id="to" placeholder="To"/>
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<select class="form-control" id="location">
+								<option hidden>Location</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Search Bikes</button>
+					</form>
+
+				</div>
+				<div class="col-md-2">
+
+				</div>
+				<script type="text/javascript">
+					$(function () {
+						$('#datetimepicker1').datetimepicker();
+						$('#datetimepicker2').datetimepicker();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
