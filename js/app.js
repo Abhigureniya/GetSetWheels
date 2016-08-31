@@ -1,6 +1,76 @@
-var app = angular.module('GetSetWheels',(['ui.router']));
+var app = angular.module('GetSetWheels',(['ui.router','satellizer']));
+
+app.config(function($authProvider) {
+
+    $authProvider.facebook({
+      clientId: 'Facebook App ID'
+    });
+
+    // Optional: For client-side use (Implicit Grant), set responseType to 'token' (default: 'code')
+    $authProvider.facebook({
+      clientId: '1768761420037591',
+      responseType: 'token'
+    });
+
+    $authProvider.google({
+      clientId: '853631268682-6ge54u7op5g74u1rh6d6mgg7mu99lcif.apps.googleusercontent.com'
+    });
+
+    $authProvider.github({
+      clientId: 'GitHub Client ID'
+    });
+
+    $authProvider.linkedin({
+      clientId: 'LinkedIn Client ID'
+    });
+
+    $authProvider.instagram({
+      clientId: 'Instagram Client ID'
+    });
+
+    $authProvider.yahoo({
+      clientId: 'Yahoo Client ID / Consumer Key'
+    });
+
+    $authProvider.live({
+      clientId: 'Microsoft Client ID'
+    });
+
+    $authProvider.twitch({
+      clientId: 'Twitch Client ID'
+    });
+
+    $authProvider.bitbucket({
+      clientId: 'Bitbucket Client ID'
+    });
+
+    $authProvider.spotify({
+      clientId: 'Spotify Client ID'
+    });
+
+    // No additional setup required for Twitter
+
+    $authProvider.oauth2({
+      name: 'foursquare',
+      url: '/auth/foursquare',
+      clientId: 'Foursquare Client ID',
+      redirectUri: window.location.origin,
+      authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate',
+    });
+
+  });
 
 
+app.controller('LoginCtrl', function($scope, $auth) {
+
+    $scope.authenticate = function(provider) {
+      $auth.authenticate(provider);
+    };
+
+  });
+
+
+/*
 window.fbAsyncInit = function() {
     FB.init({
       appId      : '1768761420037591',
@@ -46,4 +116,4 @@ function testAPI() {
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
     });
-  }
+  }*/

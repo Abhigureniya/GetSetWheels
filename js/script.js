@@ -30,7 +30,7 @@ app.config(function($stateProvider,$urlRouterProvider){
 })
 .controller("homeController",function($scope,$state){
 	$scope.user = "Abhijeet Singh Gureniya";
-	$scope.FBLogin = function(){
+	/*$scope.FBLogin = function(){
 		FB.login(function(response) {
     if (response.authResponse) {
      console.log('Welcome!  Fetching your information.... ');
@@ -46,7 +46,7 @@ app.config(function($stateProvider,$urlRouterProvider){
      $state.go('error');
     }
 });
-};
+};*/
 })
 ;
 

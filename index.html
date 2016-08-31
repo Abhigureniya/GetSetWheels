@@ -14,6 +14,10 @@
 	<script type="text/javascript" src="js/angular-ui-router.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+
+	<!-- Satellizer CDN -->
+	<script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
+
 </head>
 <body ng-app="GetSetWheels">
 
@@ -55,19 +59,19 @@
 			</div>
 		</nav>
 		<!-- Modal -->
-		<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
+		<div id="login_modal" class="modal fade" role="dialog" ng-controller="LoginCtrl">
 			<div class="modal-dialog">
 
 
 				<div class="modal-content">
-					<div class="modal-header">
-						<h4>{{user}}</h4>
-					</div>
+						<div class="modal-header">
+							<h6 class="text-right"><span class="glyphicon glyphicon-remove" data-dismiss="modal" id="close" style="cursor:pointer"></span></h6>
+						</div>
 					<div class="modal-body">
 						<div class="container-fluid">
-							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
+							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="authenticate('facebook')">Sign-In with Facebook</button>
 							<br/>
-							<button type="button" class="btn btn-lg btn-danger btn-block">Sign-In with Google</button>
+							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
 							<br/>
 							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
 						</div>
@@ -96,7 +100,7 @@
 								</div>
 							</form>
 						</div>
-						<span type="button" id="close" class="btn btn-default" data-dismiss="modal"></span>
+						
 					</div>
 				</div>
 
