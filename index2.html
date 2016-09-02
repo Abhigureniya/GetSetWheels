@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GetSetWheels</title>
+	<link rel="stylesheet" href="css/bootstrap.css"></link>
+	<link rel="stylesheet" href="css/style.css"></link>
+	<script src="js/jquery-3.1.0.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/slider.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-ui-router.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body ng-app="GetSetWheels">
+
+	<!-- <div data-toggle="collapse" data-target="#offers" class="offers">
+		<h3 class="verticaltext">OFFERS</h3>
+	</div>
+
+		<div id="offers" class="collapse">
+			
+		<div class="panel panel-default">
+  		<div class="panel-heading">Offers</div>
+  		<div class="panel-body">This Div will contain offers.</div>
+		</div>
+		
+	</div> -->
+	
+	<div class="container-fluid">
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand">GetSetWheels</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="glyphicon glyphicon-align-justify"></span>
+					</button>
+				</div>
+				<div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#" data-toggle="modal" data-target="#process_modal">Process</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#FAQ_modal">FAQ'S</a></li>
+							<li><a href="#">Offer's&nbsp;<span class="badge">2</span></a></li>
+							<li><a href="#">Contact</a></li>
+							<li>
+								<a href="#" data-toggle="modal" data-target="#login_modal">Login/Signup</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- Modal -->
+		<div id="login_modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="container-fluid">
+							<button type="button" class="btn btn-lg btn-primary btn-block">Sign-In with Facebook</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-danger btn-block">Sign-In with Google</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="text-center">
+							<h1>Already on GetSetWheels?</h1>
+							<form class="form-horizontal">
+								<div class="container-fluid">
+									<div class="form-group">
+										<div>
+											<input type="email" class="form-control input-lg" id="email" placeholder="Enter email/User Id">
+										</div>
+									</div>
+									<div class="form-group">
+
+										<div>
+											<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password">
+										</div>
+									</div>
+									<div class="form-group">
+										<div >
+											<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div id="process_modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h2>HOW DOES IT WORK?</h2>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid text-center">
+						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
+						  <br>
+						  <div class="row">
+						    <div class="col-sm-4">
+						      <p class="text-center"><strong>STEP 1</strong></p><br>
+						      <a href="#step1" data-toggle="collapse">
+						      <img src="images/bike.jpg" alt="STEP 1" class="img-circle" width="200" height="200">
+						      </a>
+						       <div id="step1" class="collapse">
+						        <p>SEARCH BIKES</p>
+						      </div>
+						    </div>
+						    <div class="col-sm-4">
+						      <p class="text-center"><strong>STEP 2</strong></p><br>
+						       <a href="#step2" data-toggle="collapse">
+						      <img src="images/bike.gif" alt="STEP 2" class="img-circle" width="200" height="200">
+						      </a>
+						      <div id="step2" class="collapse">
+						        <p>BOOK BIKES</p>
+						      </div>
+						    </div>
+						    <div class="col-sm-4">
+						      <p class="text-center"><strong>STEP 3</strong></p><br>
+						       <a href="#step3" data-toggle="collapse">
+						      <img src="images/bike1.jpg" alt="STEP 3"  class="img-circle" width="200" height="200">
+						      </a>
+						      <div id="step3" class="collapse">
+						        <p>PAYMENT</p>
+						      </div>
+						    </div>
+						  </div>
+						</div>						
+					</div>
+					<div class="modal-footer">.
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div id="FAQ_modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h2>FAQ's-Frequently Asked Questions</h2>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid text-center">
+						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
+						  <br>
+						  <div class="row">
+						    <div class="col-sm-4">
+						    	<strong>How to Book?</strong>
+						      <a href="#question1" data-toggle="collapse">
+						     	<span class="glyphicon glyphicon-chevron-down col-sm-4" id="FAQ"></span>
+						      </a>
+						       <div id="question1" class="collapse">
+						        <p>SEARCH BIKES</p>
+						      </div>
+						    </div>
+						    
+						    
+						  </div>
+						</div>						
+					</div>
+					<div class="modal-footer">.
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<ui-view>
+	
+	</ui-view>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well">
+					<div id="myCarousel" class="carousel fdi-Carousel slide">
+						<!-- Carousel items -->
+						<div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
+							<div class="carousel-inner onebyone-carosel">
+								<div class="item active">
+									<div class="col-md-4">
+										<a href="#"><img src="images/bike.gif" class="img-responsive center-block slider img-circle"></a>
+										<div class="text-center">1</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-md-4">
+										<a href="#"><img src="images/bike1.jpg" class="img-responsive center-block slider img-circle"></a>
+										<div class="text-center">2</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-md-4">
+										<a href="#"><img src="images/bike3.jpg" class="img-responsive center-block slider img-circle"></a>
+										<div class="text-center">3</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-md-4">
+										<a href="#"><img src="images/bike4.jpg" class="img-responsive center-block slider img-circle"></a>
+										<div class="text-center">4</div>
+									</div>
+								</div>
+
+							</div>
+							<a class="left carousel-control" href="#eventCarousel" data-slide="prev"></a>
+							<a class="right carousel-control" href="#eventCarousel" data-slide="next"></a>
+						</div>
+						<!--/carousel-inner-->
+					</div><!--/myCarousel-->
+				</div><!--/well-->
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="foter">
+			<h1>Footer</h1>
+		</div>
+	</div>
+</body>
+</html>
