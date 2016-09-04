@@ -4,19 +4,19 @@
 	<title>GetSetWheels</title>
 	<link rel="stylesheet" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" href="css/style.css"></link>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="js/jquery-3.1.0.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/slider.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
 	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-ui-router.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/routes.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
-
-	<!-- Satellizer CDN -->
-	<script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
 
 </head>
 <body ng-app="GetSetWheels">
@@ -59,7 +59,7 @@
 			</div>
 		</nav>
 		<!-- Modal -->
-		<div id="login_modal" class="modal fade" role="dialog" ng-controller="LoginCtrl">
+		<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
 			<div class="modal-dialog">
 
 
@@ -69,32 +69,32 @@
 						</div>
 					<div class="modal-body">
 						<div class="container-fluid">
-							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="authenticate('facebook')">Sign-In with Facebook</button>
+							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
 							<br/>
 							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
 							<br/>
 							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
 						</div>
 					</div>
-					<div class="modal-footer">
+					<div class="modal-footer" ng-controller="loginController">
 						<div class="text-center">
 							<h1>Already on GetSetWheels?</h1>
-							<form class="form-horizontal">
+							<form class="form-horizontal" method="post">
 								<div class="container-fluid">
 									<div class="form-group">
 										<div>
-											<input type="email" class="form-control input-lg" id="email" placeholder="Enter email/User Id">
+											<input type="email" class="form-control input-lg" ng-model="username" id="email" placeholder="Enter email/User Id">
 										</div>
 									</div>
 									<div class="form-group">
 
 										<div>
-											<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password">
+											<input type="password" class="form-control input-lg" ng-model="password" id="password" placeholder="Enter Password">
 										</div>
 									</div>
 									<div class="form-group">
 										<div >
-											<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
+											<button type="submit" class="btn btn-lg btn-info btn-block" ng-click="Login()">Login</button>
 										</div>
 									</div>
 								</div>
