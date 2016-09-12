@@ -2,17 +2,25 @@
 <html>
 <head>
 	<title>GetSetWheels</title>
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" href="css/style.css"></link>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="js/jquery-3.1.0.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/slider.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
 	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/angular-ui-router.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/routes.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 
 </head>
-<body>
+<body ng-app="GetSetWheels">
 
 	<!-- <div data-toggle="collapse" data-target="#offers" class="offers">
 		<h3 class="verticaltext">OFFERS</h3>
@@ -26,176 +34,257 @@
 		</div>
 		
 	</div> -->
-
-	<div class="bg1">
-		<div class="container-fluid">
-			<nav class="navbar navbar-fixed-top">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a href="#" class="navbar-brand">GetSetWheels</a>
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-							<span class="glyphicon glyphicon-align-justify"></span>
-						</button>
-					</div>
-					<div>
-						<div class="collapse navbar-collapse" id="myNavbar">
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#">Process</a></li>
-								<li><a href="#">FAQ'S</a></li>
-								<li><a href="#">Offer's&nbsp;<span class="badge">2</span></a></li>
-								<li><a href="#">Contact</a></li>
-								<li>
-									<a href="#" data-toggle="modal" data-target="#login_modal">Login/Signup</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+	
+	<div class="container-fluid">
+		<div class="row header">
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand">GetSetWheels</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="glyphicon glyphicon-align-justify"></span>
+					</button>
 				</div>
-			</nav>
-			<!-- Modal -->
-			<div id="login_modal" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-
-
-					<div class="modal-content">
-						<div class="modal-body">
-							<div class="container-fluid">
-								<button type="button" class="btn btn-lg btn-primary btn-block">Sign-In with Facebook</button>
-								<br/>
-								<button type="button" class="btn btn-lg btn-danger btn-block">Sign-In with Google</button>
-								<br/>
-								<button type="button" class="btn btn-lg btn-info btn-block">Create An Account</button>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="text-center">
-								<h1>Already on GetSetWheels?</h1>
-								<form class="form-horizontal">
-									<div class="container-fluid">
-									<div class="form-group">
-										<div>
-											<input type="email" class="form-control input-lg" id="email" placeholder="Enter email/User Id">
-										</div>
-									</div>
-									<div class="form-group">
-										
-										<div>
-											<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password">
-										</div>
-									</div>
-									<div class="form-group">
-											<div >
-											<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
-										</div>
-									</div>
-									</div>
-								</form>
-							</div>
-							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-						</div>
+				<div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#" data-toggle="modal" data-target="#process_modal">Process</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#FAQ_modal">FAQ'S</a></li>
+							<li><a href="#">Offer's&nbsp;<span class="badge">2</span></a></li>
+							<li><a href="#">Contact</a></li>
+							<li>
+								<a href="#" data-toggle="modal" data-target="#login_modal">Login/Signup</a>
+							</li>
+						</ul>
 					</div>
-
 				</div>
 			</div>
+		</nav>
 		</div>
-		<div class="container-fluid">
-			<div class="row query-block">
-				<div class="col-md-2">&nbsp</div>
-				<div class="col-md-8 query-content">
-					<div class="jumbotron query-content-text">
-						<h1>GetSetWheels</h1>
-						<h3>3 Steps 2 Ride a bike.</h3>
+		<!-- Modal -->
+		<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
+			<div class="modal-dialog">
+
+
+				<div class="modal-content">
+						<div class="modal-header">
+							<h6 class="text-right"><span class="glyphicon glyphicon-remove" data-dismiss="modal" id="close" style="cursor:pointer"></span></h6>
+						</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
+						</div>
 					</div>
+					<div class="modal-footer" ng-controller="loginController">
+						<div class="text-center">
+							<h1>Already on GetSetWheels?</h1>
+							<form class="form-horizontal" method="post">
+								<div class="container-fluid">
+									<div class="form-group">
+										<div>
+											<input type="email" class="form-control input-lg" ng-model="username" id="email" placeholder="Enter email/User Id">
+										</div>
+									</div>
+									<div class="form-group">
 
-					<form class="form-inline">
-						<div class="form-group">
-							<div class='input-group date' id='datetimepicker1'>
-								<input type='text' class="form-control" id="from" placeholder="From"/>
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
+										<div>
+											<input type="password" class="form-control input-lg" ng-model="password" id="password" placeholder="Enter Password">
+										</div>
+									</div>
+									<div class="form-group">
+										<div >
+											<button type="submit" class="btn btn-lg btn-info btn-block" ng-click="Login()">Login</button>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
-						<div class="form-group">
-							<div class='input-group date' id='datetimepicker2'>
-								<input type='text' class="form-control" id="to" placeholder="To"/>
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<select class="form-control" id="location">
-								<option hidden>Location</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-primary">Search Bikes</button>
-					</form>
-
+						
+					</div>
 				</div>
-				<div class="col-md-2">
 
-				</div>
-				<script type="text/javascript">
-					$(function () {
-						$('#datetimepicker1').datetimepicker();
-						$('#datetimepicker2').datetimepicker();
-					});
-				</script>
 			</div>
 		</div>
+
+		<div id="process_modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h2>HOW DOES IT WORK?</h2>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid text-center">
+						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
+						  <br>
+						  <div class="row">
+						    <div class="col-md-4">
+						    <img class="process-icon image-responsive" src="images/pen.png">
+						      <h1>Give us your Details</h1>
+						      <h6>Provide your details to find the best bike for you so that u can have the best.</h6>
+						      </div>
+						    
+						    <div class="col-md-4">
+						    <img class="process-icon image-responsive" src="images/reserve.png">
+						      <h1>Reserve Your Ride</h1>
+						      <h6>Book your bike in advance so that you can start exploring the place as u reach there.</h6>
+						    </div>
+						    <div class="col-md-4">
+						    <img class="process-icon image-responsive" src="images/travel.png">
+						      <h1>Enjoy your Ride</h1>
+						      <h6>Your hapiness is our first priority. Simple steps to get your bike and enjoy your awesome journey.</h6>
+						    </div>
+						    </div>
+						  </div>
+						</div>						
+					
+					<div class="modal-footer">.
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div id="FAQ_modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<h2>FAQ's-Frequently Asked Questions</h2>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid text-center">
+						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
+						  <br>
+						  <div class="row">
+						    <div class="col-sm-4">
+						    	<strong>How to Book?</strong>
+						      <a href="#question1" data-toggle="collapse">
+						     	<span class="glyphicon glyphicon-chevron-down col-sm-4" id="FAQ"></span>
+						      </a>
+						       <div id="question1" class="collapse">
+						        <p>SEARCH BIKES</p>
+						      </div>
+						    </div>
+						    
+						    
+						  </div>
+						</div>						
+					</div>
+					<div class="modal-footer">.
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+
+
 	</div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well">
-                <div id="myCarousel" class="carousel fdi-Carousel slide">
-                 <!-- Carousel items -->
-                    <div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
-                        <div class="carousel-inner onebyone-carosel">
-                            <div class="item active">
-                                <div class="col-md-4">
-                                    <a href="#"><img src="images/bike.gif" class="img-responsive center-block slider img-circle"></a>
-                                    <div class="text-center">1</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-md-4">
-                                    <a href="#"><img src="images/bike1.jpg" class="img-responsive center-block slider img-circle"></a>
-                                    <div class="text-center">2</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-md-4">
-                                    <a href="#"><img src="images/bike3.jpg" class="img-responsive center-block slider img-circle"></a>
-                                    <div class="text-center">3</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-md-4">
-                                    <a href="#"><img src="images/bike4.jpg" class="img-responsive center-block slider img-circle"></a>
-                                    <div class="text-center">4</div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <a class="left carousel-control" href="#eventCarousel" data-slide="prev"></a>
-                        <a class="right carousel-control" href="#eventCarousel" data-slide="next"></a>
-                    </div>
-                    <!--/carousel-inner-->
-                </div><!--/myCarousel-->
-            </div><!--/well-->
+	</div>
+	<div class="container-fluid">
+	<div class="row">
+	<ui-view>
+	
+	</ui-view>
+	</div>
+	
+
+	</div>
+
+	<div class="container-fluid">
+		<!--The main div for carousel-->
+<div class="container-fluid text-center">
+<div class="carousel slide row" data-ride="carousel" data-type="multi" data-interval="2000" id="fruitscarousel">
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img1.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img2.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img3.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img4.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img5.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img6.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img7.jpg" class="img-responsive"></a></div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
-	<div class="foter">
-		<h1>Footer</h1>
+
+    <a class="left carousel-control" href="#fruitscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+    <a class="right carousel-control" href="#fruitscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
 	</div>
 </div>
+</div>
+	<div class="container-fluid">
+		<div class="row footer-segment">
+			<div class="col-md-4">
+				<ul class="social-network social-circle">
+                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+			</div>
+			<div class="col-md-4">
+				<div text-align="center">
+					<h4>The Places where we are....</h4>
+					<ul class="footer-links">
+						<li>Mumbai</li>
+						<li>Lavasa</li>
+						<li>Matheran</li>
+						<li>Alibagh</li>
+						<li>Pune</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div style="display: inline; float:left;">
+					<h4><u>Company</u></h4>
+					<ul class="footer-links">
+					<li><a href="">Contact US</a></li>
+					<li><a href="">About US</a></li>
+					<li><a href="">Process</a></li>
+				</ul>
+				</div>
+				<div style="display: inline;float:left;">
+					<h4><u>Help</u></h4>
+					<ul class="footer-links">
+					<li><a href="">Contact US</a></li>
+					<li><a href="">About US</a></li>
+					<li><a href="">Process</a></li>
+				</ul>
+				</div>
+				<div style="display: inline;float:left;">
+					<h4><u>Support</u></h4>
+					<ul class="footer-links">
+					<li><a href="">Contact US</a></li>
+					<li><a href="">About US</a></li>
+					<li><a href="">Process</a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row footer-base">
+			<div class="col-md-12">
+				<h6> Copyright and T&C</h6>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

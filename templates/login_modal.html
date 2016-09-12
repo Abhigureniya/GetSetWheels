@@ -1,0 +1,47 @@
+<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
+			<div class="modal-dialog">
+
+
+				<div class="modal-content">
+						<div class="modal-header">
+							<h6 class="text-right"><span class="glyphicon glyphicon-remove" data-dismiss="modal" id="close" style="cursor:pointer"></span></h6>
+						</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
+							<br/>
+							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="text-center">
+							<h1>Already on GetSetWheels?</h1>
+							<form class="form-horizontal">
+								<div class="container-fluid">
+									<div class="form-group">
+										<div>
+											<input type="email" class="form-control input-lg" id="email" placeholder="Enter email/User Id">
+										</div>
+									</div>
+									<div class="form-group">
+
+										<div>
+											<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password">
+										</div>
+									</div>
+									<div class="form-group">
+										<div >
+											<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
