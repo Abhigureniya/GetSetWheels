@@ -1,9 +1,16 @@
 <?php
 
-$data = array("userName"=>"abhijeet","password"=>"password","access_token"=>"jgjgjgjgjg6867hbjhb7");
+$header = apache_request_headers();
 
+$data = json_decode(file_get_contents('php://input'), true);
+
+if(!isset($data['loggingInBy'])){
+$response = array("user"=>array("userRole"=>"editor","id"=>$data['password'],"token"=>"hsajdkasAHSkhkj78937294kjhdfkjshdskhfkshkfhsdkhwu","name"=>$data['username']));
+}else{
+	$response = array("user"=>array("userRole"=>"editor","id"=>$data['id'],"token"=>"hsajdkasAHSkhkj78937294kjhdfkjshdskhfkshkfhsdkhwu","name"=>$data['name']));
+}
 header('Content-Type: application/json');
-header( 'HTTP/1.1 400 BAD REQUEST' );
-echo json_encode($data);
+echo json_encode($response);
+//echo $data;
 
 ?>

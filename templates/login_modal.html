@@ -1,4 +1,4 @@
-<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
+<div id="login_modal" class="modal fade" role="dialog" ng-controller="loginController">
 			<div class="modal-dialog">
 
 
@@ -10,7 +10,7 @@
 						<div class="container-fluid">
 							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
 							<br/>
-							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
+							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="gLogin()">Sign-In with Google</button>
 							<br/>
 							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
 						</div>
@@ -22,18 +22,18 @@
 								<div class="container-fluid">
 									<div class="form-group">
 										<div>
-											<input type="email" class="form-control input-lg" id="email" placeholder="Enter email/User Id">
+											<input type="email" class="form-control input-lg" ng-model="credentials.username" placeholder="Enter email/User Id">
 										</div>
 									</div>
 									<div class="form-group">
 
 										<div>
-											<input type="password" class="form-control input-lg" id="password" placeholder="Enter Password">
+											<input type="password" class="form-control input-lg" ng-model="credentials.password" placeholder="Enter Password">
 										</div>
 									</div>
 									<div class="form-group">
 										<div >
-											<button type="submit" class="btn btn-lg btn-info btn-block">Login</button>
+											<button type="submit" class="btn btn-lg btn-info btn-block" ng-click="login(credentials)">Login</button>
 										</div>
 									</div>
 								</div>
