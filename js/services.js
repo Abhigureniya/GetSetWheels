@@ -1,38 +1,97 @@
-app.factory("AuthService", function($http, $q, $window) {
-  var userInfo;
+app
+.factory('AuthService', function ($http,$cookies,$state) {
+  var authService = {};
+ 
+  authService.login = function (credentials) {
+    return $http
+      .post('./php/login.php', credentials)
+      .then(function (res) {
+        console.log(res.data);
+        /*Session.create(res.data.id, res.data.user.id,
+                       res.data.user.role);*/
+        $cookies.putObject("userInfo",res.data.user);
+        $('#login_modal').modal('hide');
+        //$state.go('fbdialog');
+        return res.data.user;
+      });
+  };
+ 
+  authService.isAuthenticated = function () {
 
-  function getUserInfo() {
-    return userInfo;
-  }
+    if($cookies.get("userInfo")){
+      console.log($cookies.getObject('userInfo'));
+      console.log("Returning true");
+      return true;
+    }else{
+      return false;
+    }
 
-  function login(userName, password) {
-
-    console.log(userName);
-    console.log(password);
-
-    $http.post("./php/login.php",{
-      userName: userName,
-      password: password
-    }).then(function(result) {
-      
-      userInfo={};
-      /*userInfo = {
-        accessToken: result.access_token,
-        userName: result.userName,
-        password: result.password
-      };*/
-      console.log("Printing response");
-      console.log(result);
-      //$window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-      //deferred.resolve(userInfo);
-    });/*.function(error) {
-      console.log("Error is printing");
-      console.log(error);
-      deferred.reject(error);
-    });*/
-  }
-
+  };
+ 
+  authService.isAuthorized = function (authorizedRoles) {
+    if (!angular.isArray(authorizedRoles)) {
+      authorizedRoles = [authorizedRoles];
+    }
+    console.log("Getting user from cookies");
+    console.log();
+    var user = $cookies.getObject('userInfo');
+    console.log(user);
+    //console.log("Role:- " + user.userRole + " AuthorizedRole:- " + authorizedRoles);
+    return (authService.isAuthenticated() &&
+      authorizedRoles.indexOf(user.userRole) !== -1);
+  };
+ 
+  return authService;
+})
+/*.service('Session', function ($cookies) {
+  this.create = function (sessionId, userId, userRole) {
+    this.id = sessionId;
+    this.userId = userId;
+    this.userRole = userRole;
+  };
+  this.destroy = function () {
+    this.id = null;
+    this.userId = null;
+    this.userRole = null;
+  };
+})*/
+.factory('AuthInterceptor', function ($rootScope, $q,
+                                      AUTH_EVENTS) {
   return {
-    login: login
+
+    request: function(config){
+      console.log("Request interceptor:- " + config);
+      return $q.resolve(config);
+    },
+
+    responseError: function (response) { 
+      $rootScope.$broadcast({
+        401: AUTH_EVENTS.notAuthenticated,
+        403: AUTH_EVENTS.notAuthorized,
+        419: AUTH_EVENTS.sessionTimeout,
+        440: AUTH_EVENTS.sessionTimeout
+      }[response.status], response);
+      return $q.reject(response);
+    }
+  };
+})
+.factory('AuthResolver', function ($q, $rootScope, $state) {
+  return {
+    resolve: function () {
+      var deferred = $q.defer();
+      var unwatch = $rootScope.$watch('currentUser', function (currentUser) {
+        if (angular.isDefined(currentUser)) {
+          if (currentUser) {
+            deferred.resolve(currentUser);
+          } else {
+            deferred.reject();
+            $state.go('default');
+            $('#login_modal').modal('show');
+          }
+          unwatch();
+        }
+      });
+      return deferred.promise;
+    }
   };
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="GetSetWheels">
 <head>
 	<title>GetSetWheels</title>
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -7,33 +7,14 @@
 	<link rel="stylesheet" href="css/style.css"></link>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="js/jquery-3.1.0.js"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/slider.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
-	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="js/angular-ui-router.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/routes.js"></script>
-	<script type="text/javascript" src="js/services.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
 
 </head>
-<body ng-app="GetSetWheels">
+<body ng-controller="ApplicationController">
 
-	<!-- <div data-toggle="collapse" data-target="#offers" class="offers">
-		<h3 class="verticaltext">OFFERS</h3>
-	</div>
-
-		<div id="offers" class="collapse">
-			
-		<div class="panel panel-default">
-  		<div class="panel-heading">Offers</div>
-  		<div class="panel-body">This Div will contain offers.</div>
-		</div>
-		
-	</div> -->
 	
 	<div class="container-fluid">
 		<div class="row header">
@@ -52,8 +33,11 @@
 							<li><a href="#" data-toggle="modal" data-target="#FAQ_modal">FAQ'S</a></li>
 							<li><a href="#">Offer's&nbsp;<span class="badge">2</span></a></li>
 							<li><a href="#">Contact</a></li>
-							<li>
+							<li ng-if="!currentUser">
 								<a href="#" data-toggle="modal" data-target="#login_modal">Login/Signup</a>
+							</li>
+							<li ng-if="currentUser">
+								<a href="#" ng-click="logout()">Logout</a>
 							</li>
 						</ul>
 					</div>
@@ -61,127 +45,12 @@
 			</div>
 		</nav>
 		</div>
-		<!-- Modal -->
-		<div id="login_modal" class="modal fade" role="dialog" ng-controller="homeController">
-			<div class="modal-dialog">
-
-
-				<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="text-right"><span class="glyphicon glyphicon-remove" data-dismiss="modal" id="close" style="cursor:pointer"></span></h6>
-						</div>
-					<div class="modal-body">
-						<div class="container-fluid">
-							<button type="button" class="btn btn-lg btn-primary btn-block" ng-click="FBLogin()">Sign-In with Facebook</button>
-							<br/>
-							<button type="button" class="btn btn-lg btn-danger btn-block" ng-click="authenticate('google')">Sign-In with Google</button>
-							<br/>
-							<button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" ui-sref="signup">Create An Account</button>
-						</div>
-					</div>
-					<div class="modal-footer" ng-controller="loginController">
-						<div class="text-center">
-							<h1>Already on GetSetWheels?</h1>
-							<form class="form-horizontal" method="post">
-								<div class="container-fluid">
-									<div class="form-group">
-										<div>
-											<input type="email" class="form-control input-lg" ng-model="username" id="email" placeholder="Enter email/User Id">
-										</div>
-									</div>
-									<div class="form-group">
-
-										<div>
-											<input type="password" class="form-control input-lg" ng-model="password" id="password" placeholder="Enter Password">
-										</div>
-									</div>
-									<div class="form-group">
-										<div >
-											<button type="submit" class="btn btn-lg btn-info btn-block" ng-click="Login()">Login</button>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-						
-					</div>
-				</div>
-
-			</div>
+		
+		<div ng-include="'templates/login_modal.html'"></div>		
+		<div ng-include="'templates/process_modal.html'"></div>
+		<div ng-include="'templates/faq_modal.html'"></div>
 		</div>
-
-		<div id="process_modal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-
-				<div class="modal-content">
-					<div class="modal-header text-center">
-						<h2>HOW DOES IT WORK?</h2>
-					</div>
-					<div class="modal-body">
-						<div class="container-fluid text-center">
-						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
-						  <br>
-						  <div class="row">
-						    <div class="col-md-4">
-						    <img class="process-icon image-responsive" src="images/pen.png">
-						      <h1>Give us your Details</h1>
-						      <h6>Provide your details to find the best bike for you so that u can have the best.</h6>
-						      </div>
-						    
-						    <div class="col-md-4">
-						    <img class="process-icon image-responsive" src="images/reserve.png">
-						      <h1>Reserve Your Ride</h1>
-						      <h6>Book your bike in advance so that you can start exploring the place as u reach there.</h6>
-						    </div>
-						    <div class="col-md-4">
-						    <img class="process-icon image-responsive" src="images/travel.png">
-						      <h1>Enjoy your Ride</h1>
-						      <h6>Your hapiness is our first priority. Simple steps to get your bike and enjoy your awesome journey.</h6>
-						    </div>
-						    </div>
-						  </div>
-						</div>						
-					
-					<div class="modal-footer">.
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		<div id="FAQ_modal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header text-center">
-						<h2>FAQ's-Frequently Asked Questions</h2>
-					</div>
-					<div class="modal-body">
-						<div class="container-fluid text-center">
-						  <p><em>3 Steps 2 Ride a bike!!!</em></p>
-						  <br>
-						  <div class="row">
-						    <div class="col-sm-4">
-						    	<strong>How to Book?</strong>
-						      <a href="#question1" data-toggle="collapse">
-						     	<span class="glyphicon glyphicon-chevron-down col-sm-4" id="FAQ"></span>
-						      </a>
-						       <div id="question1" class="collapse">
-						        <p>SEARCH BIKES</p>
-						      </div>
-						    </div>
-						    
-						    
-						  </div>
-						</div>						
-					</div>
-					<div class="modal-footer">.
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-
-			</div>
+		
 
 
 	</div>
@@ -197,31 +66,74 @@
 	</div>
 
 	<div class="container-fluid">
+	<div class="row why_gsw">
+	<div class="col-md-12 col-xs-12 ws_wu">
+		<div class="col-md-2 col-xs-6">
+			<img src="images/rupees.png" class="ws_wu_img">
+			<p class="yus-text">REFUNDABLE DEPOSIT</p>
+			<p>We have the lowest deposit of Rs. 999 which fully is refundable.</p>
+		</div>
+
+		<div class="col-md-2 col-xs-6">
+			<img src="images/kilometers.png" alt="Unlimited Kms" class="ws_wu_img">
+			<p class="yus-text">UNLIMITED KILOMETERS</p>
+			<p>Now rent a bike with us and travel with no restrictions anywhere.</p>
+		</div>
+
+		<div class="col-md-2 col-xs-6">
+			<img src="images/helmet.png" alt="Helmet" class="ws_wu_img">
+			<p class="yus-text">COMPLEMENTARY HELMET</p>
+			<p>Your safety is our priority, so the helmet is on us. Your saftey is our first priority.</p>
+		</div>
+
+		<div class="col-md-2 col-xs-6">
+			<img src="images/files.png" alt="Tax and Insurance" class="ws_wu_img">
+			<p class="yus-text">TAX &amp; INSURANCE INCLUDED</p>
+			<p>Our rents are inclusive of all taxes and insurance.</p>
+		</div>
+
+		<div class="col-md-2 col-xs-6">
+			<img src="images/bike.png" alt="Latest Fleet" class="ws_wu_img">
+			<p class="yus-text">LATEST FLEET</p>
+			<p>Our fleet includes the latest and verfied models so that you look good when you ride.</p>
+		</div>
+
+		<div class="col-md-2 col-xs-6">
+			<img src="images/wallet.png" alt="Cheapest Rates" class="ws_wu_img">
+			<p class="yus-text">CHEAPEST RATES</p>
+			<p>With the rent starting only at Rs. 10 per hour, it'seasy on the pocket in such price.</p>
+		</div>
+	</div>
+</div>
+		
+	</div>
+
+	
 		<!--The main div for carousel-->
-<div class="container-fluid text-center">
-<div class="carousel slide row" data-ride="carousel" data-type="multi" data-interval="2000" id="fruitscarousel">
+<div class="container-fluid text-center carousel-container ">
+<div class="carousel slide row " data-ride="carousel" data-type="multi" data-interval="2000" id="fruitscarousel">
 
     <div class="carousel-inner">
         <div class="item active">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img1.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/avenger220.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img2.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/desertstorm.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img3.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/fz.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img4.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/himalayan.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img5.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/pulsar 220.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img6.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/r15.png" class="img-responsive"></a></div>
         </div>
         <div class="item">
-            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/img7.jpg" class="img-responsive"></a></div>
+            <div class="col-md-3 col-sm-4 col-xs-12"><a href="#"><img src="images/thunderbird.png" class="img-responsive"></a></div>
         </div>
     </div>
 
@@ -229,7 +141,7 @@
     <a class="right carousel-control" href="#fruitscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
 	</div>
 </div>
-</div>
+
 	<div class="container-fluid">
 		<div class="row footer-segment">
 			<div class="col-md-4">
@@ -286,5 +198,15 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/angular-ui-router.js"></script>
+	<script type="text/javascript" src="js/angular-google-gapi.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/routes.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.js"></script>
 </body>
 </html>

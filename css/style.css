@@ -40,13 +40,15 @@
 }
 
 .bg1{
-	background-image: url('../background/background.png');
+	background-image: url('../background/Biker And Bike.jpg');
 	background-size: 100vw 100vh;
+	opacity: 0.8;
 }
 
 .bg2{
-	background-image: url('../background/background.png');
+	background-image: url('../background/KTM.jpg');
 	background-size: 100vw 100vh;
+	opacity: 0.8;
 }
 
 .query-content-text{
@@ -199,7 +201,7 @@ a.socialIcon:hover, .socialHoverClass {
 /*For foter*/
 
 /* carousel*/
-.carousel-container{
+/*.carousel-container{
 	width: 2000px;
 	margin-left: 0px;
 	overflow:hidden;
@@ -210,7 +212,7 @@ a.socialIcon:hover, .socialHoverClass {
 	display: inline;
 	width: 200px;
 	height: 200px;
-}
+}*/
 
 
 
@@ -297,4 +299,41 @@ image slider
 }
 .modal-body{
 	background-color: #ECEFF1;
+}
+
+.ws_wu {
+    background: #dddddd;
+    text-align: center;
+    padding: 0px 0px;
+}
+
+.why_gsw.col-xs-12 {
+    width: 100%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+}
+.ws_wu_img {
+    height: 100px;
+    padding: 25px;
+}
+img.ws_wu_img{
+	vertical-align: middle;
+	border: 0;
+}
+.ws_wu div:hover {
+    background-color: #616161;
+    color: #E0E0E0;
+}
+
+.yus-text {
+    font-weight: 600;
+}
+
+.carousel-container{
+	padding: 10px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin-left: 0px;
+	margin-right: 0px;
 }
