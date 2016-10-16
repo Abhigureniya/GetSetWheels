@@ -1,5 +1,5 @@
 app
-.factory('AuthService', function ($http,$cookies,$state) {
+.factory('AuthService', function ($http,$localStorage,$state) {
   var authService = {};
  
   authService.login = function (credentials) {
@@ -9,7 +9,7 @@ app
         console.log(res.data);
         /*Session.create(res.data.id, res.data.user.id,
                        res.data.user.role);*/
-        $cookies.putObject("userInfo",res.data.user);
+        $localStorage.userInfo=res.data.user;
         $('#login_modal').modal('hide');
         //$state.go('fbdialog');
         return res.data.user;
@@ -18,8 +18,8 @@ app
  
   authService.isAuthenticated = function () {
 
-    if($cookies.get("userInfo")){
-      console.log($cookies.getObject('userInfo'));
+    if($localStorage.userInfo){
+      console.log($localStorage.userInfo);
       console.log("Returning true");
       return true;
     }else{
@@ -34,7 +34,7 @@ app
     }
     console.log("Getting user from cookies");
     console.log();
-    var user = $cookies.getObject('userInfo');
+    var user = $localStorage.userInfo;
     console.log(user);
     //console.log("Role:- " + user.userRole + " AuthorizedRole:- " + authorizedRoles);
     return (authService.isAuthenticated() &&

@@ -1,7 +1,7 @@
-var app = angular.module('GetSetWheels',(['ui.router','angular-google-gapi','ngCookies']));
+var app = angular.module('GetSetWheels',(['ui.router','angular-google-gapi','ngCookies','ngStorage']));
 
 
-
+//console.log(Storage); 
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '1768761420037591',
@@ -146,6 +146,7 @@ app.constant('AUTH_EVENTS', {
 
 //Carousel begins here
 jQuery(document).ready(function() {
+
   jQuery('.carousel[data-type="multi"] .item').each(function(){
     var next = jQuery(this).next();
     if (!next.length) {
@@ -160,6 +161,9 @@ jQuery(document).ready(function() {
       next.children(':first-child').clone().appendTo($(this));
     }
   });
+
+  $("#success-alert").hide();
+            
 });
 //Carousel ends here
 

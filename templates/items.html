@@ -1,38 +1,33 @@
-<div class="col-md-2">
-	<h1>Left Area</h1>
+<div ng-controller="CartController">
+  <div class="col-md-2 col-sm-2 col-xs-2">Hello {{user}}</div>
+  <div class="col-md-8 col-sm-8 col-xs-8">This part can contains advertisement.</div>
+  <div class="col-md-2 col-sm-2 col-xs-2">Shopping cart[{{cart.products}}]</div>
+  <hr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-2">
+    <h2 style="text-align:center;">Filter</h2>
+    </div>
+<div class="col-xs-12 col-sm-12 col-md-10">
+<div class="clearfix">
+<div class="col-xs-6 col-sm-4 col-md-3" style="border: 2px solid transparent;" ng-repeat="x in cart.items">
+      <img class="img-responsive bikes" ng-src="./images/{{x}}" style="padding: 0px; border: 2px solid black;margin: 0px;"/>
+    <div class="offer offer-default" style="padding: 0px;">
+        <div class="offer-content" style="padding: 0px;" >
+            <div id="item">
+  <button class="btn btn-primary item-section">Rs. 800/-</button>
+  <button class="btn btn-primary item-section">Available</button>
+  <button class="btn btn-primary item-section addToCart" ng-click="addToCart('1')">Cart +</button>
 </div>
-<div class="col-md-8">
-	<h1 style="background-color:#099988">Area for filters and other options</h1>
-	<div>
-		<ul class="products">
-			<li>
-        		<a href="#">
-            	<img src="images/img1.jpg">
-            	</a>
-            	<table class="details">
-            		<tr>
-            			<th>Rs. 500/-</th>
-            			<th colspan="3">Available</th>
-            			<th>Add To Cart</th>
-            		</tr>
-            		<tr>
-            			<th colspan="5">
-            				<p>The Details Goes Here</p>
-            			</th>
-            		</tr>
-            	</table>
-        		
-    		</li>
-    		<li>
-        		<a href="#">
-            	<img src="images/img1.jpg">
-            	</a>
-            	
-        		
-    		</li>
-		</ul>
-	</div>
+            <button class="btn btn-block btn-primary" align="center" style="padding: 0px; margin: 0px;">
+                <h5>A default offer</h5>
+            </button>
+            
+        </div>
+    </div>
 </div>
-<div class="col-md-2">
-	<h1>Right Area</h1>
+</div>
+</div>
+</div>
+</div>
 </div>

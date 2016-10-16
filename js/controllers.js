@@ -1,5 +1,5 @@
 app
-.controller('ApplicationController',function ($scope,USER_ROLES,AuthService,$state,$cookies,$rootScope) {
+.controller('ApplicationController',function ($scope,USER_ROLES,AuthService,$state,$localStorage,$rootScope) {
   $scope.currentUser = null;
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
@@ -20,7 +20,7 @@ app
         console.log("User Signed out");
       });
     }
-    $cookies.remove('userInfo');
+    $localStorage.userInfo=null;
     $scope.currentUser = null;
     $state.go('default');
 
@@ -37,6 +37,28 @@ app
 })
 .controller("itemsController",function($scope){
   
+})
+.controller("CartController",function($scope){
+    
+    $scope.cart = {"items":["activa.png","apache 160.png","dio.png","bullet 350.png","fz.png"],"total":0,"products":0};
+
+    $scope.addToCart = function(item){
+        $scope.cart.items.push(item);
+        $scope.cart.products +=1;
+        $("#success-alert").alert();
+                $("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
+               $("#success-alert").slideUp(500);
+                }); 
+    }
+    $scope.removeFromCart = function(itm){
+        $scope.cart.items.forEach(function(item,index){
+          if(item.id == item.id){
+            $scope.cart.items.splice(item,1);
+            $scope.cart.products -=1;
+          }
+        });
+    }
+
 })
 .controller("homeController",function ($scope,$state,GApi) {
   
